@@ -31,7 +31,7 @@ urlpatterns = [
 
 
     # # Global lookup
-    # path("accounts/", views.Accounts.as_view(), name="accounts"),
+    path("accounts/", views.Accounts.as_view(), name="accounts"),
     # path("accounts/<str:name>/", views.AccountsDetail.as_view(), name="accounts_detail"),
     # path("hits/", views.HITs.as_view(), name="hits"),
     # path("hits/<int:hit_id>/", views.HITDetail.as_view(), name="hit_detail"),

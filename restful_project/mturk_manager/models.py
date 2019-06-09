@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.contrib.auth.hashers import make_password
 
 
 class AccountMturk(models.Model):
@@ -8,11 +9,16 @@ class AccountMturk(models.Model):
     key_access = models.CharField(max_length=200)
     key_secret = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = "Mturk Account"
+
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = "Mturk Account"
+    def save(self, *args, **kwargs):
+        # żeby teraz sprawdzić poprawność, należy wykonać check_password(pass, encoded)
+        self.key_secret = make_password(self.key_secret)
+        super().save(*args, **kwargs)
 
 
 class Project(models.Model):

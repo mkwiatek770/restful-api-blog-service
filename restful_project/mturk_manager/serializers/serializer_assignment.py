@@ -1,9 +1,6 @@
-from rest_framework import serializers
+from mturk_manager.serializers import SerializerHIT, SerializerWorker
 from mturk_manager.models import Assignment
-from mturk_manager.serializers import (
-    SerializerHIT,
-    SerializerWorker
-)
+from rest_framework import serializers
 
 
 class SerializerAssignment(serializers.ModelSerializer):

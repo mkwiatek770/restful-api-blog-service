@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from mturk_manger.models import HIT
+from mturk_manager.models import HIT
 from mturk_manager.serializers import SerializerBatch
 
 
