@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from mturk_manager.models import Batch
+from mturk_manager.models import TemplateWorker
 
 
-class SerializerBatch(serializers.ModelSerializer):
+class SerializerTemplateWorker(serializers.ModelSerializer):
 
     class Meta:
-        model = Batch
+        model = TemplateWorker
         fields = (
             "height_frame",
             "content",

@@ -12,5 +12,6 @@ router.register(r"blogs", blog_views.BlogViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("api/", include("mturk_manager.urls")),
     path("api_auth/", include("rest_framework.urls", namespace="rest_framework"))
 ]
