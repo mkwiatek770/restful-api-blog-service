@@ -3,8 +3,8 @@ from django.utils import timezone
 from django.utils.text import slugify
 
 
-class Account_Mturk(models.Model):
-    name = models.CharField(max_length=200, qnique=True)
+class AccountMturk(models.Model):
+    name = models.CharField(max_length=200, unique=True)
     key_access = models.CharField(max_length=200)
     key_secret = models.CharField(max_length=200)
 
@@ -20,7 +20,7 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     account_mturk = models.ForeignKey(
-        Account_Mturk,
+        AccountMturk,
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -29,7 +29,7 @@ class Project(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     settings_batch = models.ForeignKey(
-        'Settings_Batch',
+        'SettingsBatch',
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -41,7 +41,7 @@ class Project(models.Model):
         super().save(*args, **kwargs)
 
 
-class Settings_Batch(models.Model):
+class SettingsBatch(models.Model):
 
     name = models.CharField(max_length=200)
 
@@ -57,7 +57,7 @@ class Settings_Batch(models.Model):
     duration = models.IntegerField(default=3600)
     amount_budget_max = models.IntegerField(null=True, blank=True)
     template_worker = models.ForeignKey(
-        "Template_Worker",
+        "TemplateWorker",
         on_delete=models.SET_NULL,
         null=True,
         blank=True
@@ -65,7 +65,7 @@ class Settings_Batch(models.Model):
     keywords = models.ManyToManyField("Keyword")
     qualifications = models.ManyToManyField("Qualification")  # ważne pole!!!
     message_reject = models.ForeignKey(
-        "Message_Reject", on_delete=models.SET_NULL, null=True)
+        "MessageReject", on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.project} -- {self.name}"
@@ -74,7 +74,7 @@ class Settings_Batch(models.Model):
 class Batch(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    use_sandbox = models.BooleanField()
+    use_sandbox = models.BooleanField(default=True)
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -122,7 +122,7 @@ class Assignment(models.Model):
         return f"{self.id_assignment} ({self.status})"
 
 
-class Message_Reject(models.Model):
+class MessageReject(models.Model):
     name = models.CharField(max_length=200)
     message = models.CharField(max_length=1024)
 
@@ -140,20 +140,28 @@ class Worker(models.Model):
     def __str__(self):
         return self.id_worker
 
+
 class Keyword(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
         return self.name
 
-class Qualification(models.Model):
 
-class Template_Worker(models.Model):
-    height_frame = models.IntegerField() # dodać default value
+class Qualification(models.Model):
+    name = models.CharField(max_length=200)
+    keywords = models.ManyToManyField('Keyword')
+    description = models.TextField()
+    test = models.TextField(null=True, blank=True)
+    answer_key = models.TextField(null=True, blank=True)
+
+
+class TemplateWorker(models.Model):
+    height_frame = models.IntegerField()  # dodać default value
     content = models.TextField()
-    json_dict_parameters = models.TextField() # pole które wyłapuje wszystkie parametry z templatki czyli szuka patternu ${variable}
+    # pole które wyłapuje wszystkie parametry z templatki czyli szuka patternu ${variable}
+    json_dict_parameters = models.TextField()
 
     def fetch_parameters(self):
-        #TODO Napisać funkcję, która wyciąga wszystkie parametry z pola content i wstawia jako klucze w json_dict_parameters
+        # TODO Napisać funkcję, która wyciąga wszystkie parametry z pola content i wstawia jako klucze w json_dict_parameters
         pass
-
