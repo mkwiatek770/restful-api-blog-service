@@ -7,6 +7,7 @@ class SerializerMessageReject(serializers.ModelSerializer):
     class Meta:
         model = MessageReject
         fields = (
+            "url",
             "name",
             "message",
         )

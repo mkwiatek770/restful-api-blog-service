@@ -6,6 +6,7 @@ router = DefaultRouter()
 
 router.register(r"accounts", views.Accounts)
 router.register(r"keywords", views.Keywords)
+router.register(r"messages-reject", views.MessagesReject)
 router.register(r"qualifications", views.Qualifications)
 router.register(r"workers", views.Workers)
 # Ctrl + Shift + P --> Formating --> Save Without Formatting
