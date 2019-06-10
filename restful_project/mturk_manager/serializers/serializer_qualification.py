@@ -1,15 +1,18 @@
 from rest_framework import serializers
-from mturk_manager.models import Qualification
+from mturk_manager.models import Qualification, Keyword
 from mturk_manager.serializers import SerializerKeyword
 
 
 class SerializerQualification(serializers.ModelSerializer):
 
-    keywords = SerializerKeyword()
+    # keywords = SerializerKeyword(many=True, read_only=True)
+    keywords = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Keyword.objects.all())
 
     class Meta:
         model = Qualification
         fields = (
+            "url",
             "name",
             "keywords",
             "description",
