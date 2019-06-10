@@ -7,6 +7,7 @@ class SerializerWorker(serializers.ModelSerializer):
     class Meta:
         model = Worker
         fields = (
+            "url",
             "id_worker",
             "global_block",
         )

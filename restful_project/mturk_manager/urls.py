@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 router.register(r"accounts", views.Accounts)
-
+router.register(r"workers", views.Workers)
 # Ctrl + Shift + P --> Formating --> Save Without Formatting
 
 urlpatterns = [
