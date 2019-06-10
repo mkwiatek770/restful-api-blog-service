@@ -1,9 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from mturk_manager import views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+
+router.register(r"accounts", views.Accounts)
 
 # Ctrl + Shift + P --> Formating --> Save Without Formatting
 
 urlpatterns = [
+    path("", include(router.urls)),
     # Project lookup
     # path("projects/", views.Projects.as_view(), name="projects"),
     # path("projects/<slug:slug_project>/", views.ProjectDetail.as_View(), name="project_detail"),
@@ -31,7 +37,7 @@ urlpatterns = [
 
 
     # # Global lookup
-    path("accounts/", views.Accounts.as_view(), name="accounts"),
+    # path("accounts/", views.Accounts.as_view(), name="accounts"),
     # path("accounts/<str:name>/", views.AccountsDetail.as_view(), name="accounts_detail"),
     # path("hits/", views.HITs.as_view(), name="hits"),
     # path("hits/<int:hit_id>/", views.HITDetail.as_view(), name="hit_detail"),

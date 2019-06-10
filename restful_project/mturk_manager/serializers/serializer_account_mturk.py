@@ -6,6 +6,7 @@ class SerializerAccountMturk(serializers.ModelSerializer):
     class Meta:
         model = AccountMturk
         fields = (
+            "url",
             "name",
             "key_access",
             "key_secret",
