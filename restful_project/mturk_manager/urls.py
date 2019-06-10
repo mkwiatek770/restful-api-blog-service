@@ -4,7 +4,9 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
+# Global lookup
 router.register(r"accounts", views.Accounts)
+router.register(r"hits", views.HITs)
 router.register(r"keywords", views.Keywords)
 router.register(r"messages-reject", views.MessagesReject)
 router.register(r"qualifications", views.Qualifications)
