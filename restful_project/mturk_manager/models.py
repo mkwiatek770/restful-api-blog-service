@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -166,8 +167,13 @@ class TemplateWorker(models.Model):
     height_frame = models.IntegerField()  # dodać default value
     content = models.TextField()
     # pole które wyłapuje wszystkie parametry z templatki czyli szuka patternu ${variable}
-    json_dict_parameters = models.TextField()
+    json_parameters = models.TextField()
 
     def fetch_parameters(self):
         # TODO Napisać funkcję, która wyciąga wszystkie parametry z pola content i wstawia jako klucze w json_dict_parameters
-        pass
+        pattern = re.compile(r"\$\{(?P<param>\w+)\}")
+        self.json_parameters = list(set(re.findall(pattern, self.content)))
+
+    def save(self, *args, **kwargs):
+        self.fetch_parameters()
+        super().save(*args, **kwargs)

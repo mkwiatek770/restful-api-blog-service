@@ -10,6 +10,7 @@ router.register(r"hits", views.HITs)
 router.register(r"keywords", views.Keywords)
 router.register(r"messages-reject", views.MessagesReject)
 router.register(r"qualifications", views.Qualifications)
+router.register(r"templates-worker", views.TemplatesWorker)
 router.register(r"workers", views.Workers)
 # Ctrl + Shift + P --> Formating --> Save Without Formatting
 

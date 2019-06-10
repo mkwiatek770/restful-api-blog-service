@@ -7,7 +7,8 @@ class SerializerTemplateWorker(serializers.ModelSerializer):
     class Meta:
         model = TemplateWorker
         fields = (
+            "url",
             "height_frame",
             "content",
-            "json_dict_parameters",
+            "json_parameters",
         )
