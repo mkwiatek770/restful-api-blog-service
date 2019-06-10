@@ -6,4 +6,4 @@ class SerializerKeyword(serializers.ModelSerializer):
 
     class Meta:
         model = Keyword
-        fields = ("name",)
+        fields = ("url", "name")

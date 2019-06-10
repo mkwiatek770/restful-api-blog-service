@@ -5,7 +5,7 @@ from mturk_manager.serializers import SerializerKeyword
 
 class SerializerQualification(serializers.ModelSerializer):
 
-    # keywords = SerializerKeyword(many=True, read_only=True)
+    # keywords = SerializerKeyword(many=True)
     keywords = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Keyword.objects.all())
 

@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 router.register(r"accounts", views.Accounts)
+router.register(r"keywords", views.Keywords)
 router.register(r"qualifications", views.Qualifications)
 router.register(r"workers", views.Workers)
 # Ctrl + Shift + P --> Formating --> Save Without Formatting
